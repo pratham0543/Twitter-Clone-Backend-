@@ -29,8 +29,7 @@ const User = new mongoose.Schema({
     },
     phone: {
         type: mongoose.Schema.Types.Number,
-        required: true,
-        unique: true
+        required: true
     },
     dob: {
         type: mongoose.Schema.Types.Date,
