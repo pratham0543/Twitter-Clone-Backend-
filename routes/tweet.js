@@ -37,15 +37,18 @@ router.post("/", authenticate, (req, res) => {
   if (error.error) {
     return res.status(400).send(error.error)
   }
-  const newTweet = new Tweet({
-    _id: new mongoose.Types.ObjectId(),
-    username: req.body.username,
-    content: req.body.content,
-  });
-  newTweet.save()
-    .then(result => res.status(201).json({ msg: "Tweet posted successfully", Tweet: result }))
-    .catch(err => res.status(500).json({ msg: "Unable to post tweet at the moment. Please try again later", error: err }))
-  // }
+  if (req.username === req.body.username) {
+    const newTweet = new Tweet({
+      _id: new mongoose.Types.ObjectId(),
+      username: req.body.username,
+      content: req.body.content,
+    });
+    newTweet.save()
+      .then(result => res.status(201).json({ msg: "Tweet posted successfully", Tweet: result }))
+      .catch(err => res.status(500).json({ msg: "Unable to post tweet at the moment. Please try again later", error: err }))
+  } else {
+    return res.status(400).json({ msg: "Please check username and login again" })
+  }
 })
 
 // PATCH REQUEST --> UPDATE A TWEET
