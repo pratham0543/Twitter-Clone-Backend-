@@ -10,6 +10,7 @@ const signup = require("./routes/signup")
 const login = require('./routes/login')
 const tweet = require('./routes/tweet')
 const createAdmin = require('./routes/admin')
+const logout=require('./routes/logout')
 
 app.use(cors())
 
@@ -27,6 +28,7 @@ app.use('/signup', signup)
 app.use('/login', login)
 app.use('/tweet', tweet)
 app.use('/createAdmin', createAdmin)
+app.use('/logout',logout)
 
 app.get('/', (req, res) => {
     res.status(200).json({ msg: 'Resource not found' })
